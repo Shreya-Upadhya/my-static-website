@@ -2,146 +2,425 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My DevOps Portfolio | GitHub Pages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🎨 Color Match Challenge | GitHub Pages Game</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
 
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
+        .game-container {
+            background: rgba(255,255,255,0.95);
+            border-radius: 40px;
+            padding: 20px 25px 35px;
+            max-width: 550px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
             text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
+            transition: transform 0.2s;
         }
 
         h1 {
-            color: #667eea;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 5px;
         }
 
-        .badge {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
+        .sub {
+            color: #666;
             font-size: 0.8rem;
             margin-bottom: 20px;
         }
 
-        p {
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .tech-stack {
+        .stats {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 25px 0;
-            flex-wrap: wrap;
-        }
-
-        .tech {
-            background: #f0f0f0;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 0.9rem;
+            justify-content: space-between;
+            background: #f0f2f5;
+            padding: 12px 20px;
+            border-radius: 60px;
+            margin-bottom: 25px;
             font-weight: bold;
-            color: #667eea;
         }
 
-        .btn {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
+        .score-box, .best-box {
+            background: white;
+            padding: 5px 15px;
+            border-radius: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .score-box span:first-child, .best-box span:first-child {
+            color: #888;
+            font-size: 0.75rem;
+        }
+
+        .score-box span:last-child, .best-box span:last-child {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #2a5298;
+            margin-left: 8px;
+        }
+
+        .color-box {
+            width: 200px;
+            height: 200px;
+            margin: 15px auto;
             border-radius: 30px;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: background 0.3s ease;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transition: all 0.1s ease;
+            cursor: pointer;
+            border: 4px solid white;
         }
 
-        .btn:hover {
-            background: #764ba2;
+        .color-box:active {
+            transform: scale(0.97);
+        }
+
+        .rgb-text {
+            font-family: monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: #1e1e2f;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: #ffd966;
+            letter-spacing: 1px;
+            margin: 10px 0;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .color-btn {
+            padding: 14px;
+            border: none;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #f0f2f5;
+            color: #333;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+
+        .color-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(0.96);
+        }
+
+        .color-btn:active {
+            transform: translateY(1px);
+        }
+
+        .message {
+            font-size: 1rem;
+            margin: 12px 0;
+            padding: 8px;
+            border-radius: 40px;
+            font-weight: bold;
+        }
+
+        .new-game-btn {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s;
+            width: 80%;
+        }
+
+        .new-game-btn:hover {
+            transform: scale(1.02);
+            filter: brightness(1.05);
         }
 
         footer {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: #999;
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 20px;
         }
 
         @media (max-width: 480px) {
-            .card {
-                padding: 25px;
+            .game-container {
+                padding: 15px 18px 25px;
             }
-            h1 {
-                font-size: 1.8rem;
+            .color-box {
+                width: 160px;
+                height: 160px;
+            }
+            .rgb-text {
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="badge">🚀 DevOps Internship Task 6</div>
-        <h1>GitHub Pages</h1>
-        <p>Successfully deployed a static website directly from a GitHub repository.</p>
-        
-        <div class="tech-stack">
-            <span class="tech">HTML5</span>
-            <span class="tech">CSS3</span>
-            <span class="tech">GitHub Pages</span>
-        </div>
-        
-        <p>This website is hosted for free using <strong>GitHub Pages</strong> — a static hosting service that serves files directly from a Git repository.</p>
-        
-        <a href="#" class="btn" id="clickBtn">✨ Click Me ✨</a>
-        
-        <footer>
-            Deployed on: <span id="date"></span><br>
-            Repository → Settings → Pages → Enabled
-        </footer>
+<div class="game-container">
+    <h1>🎨 COLOR MATCH</h1>
+    <div class="sub">match the RGB value → tap the correct color</div>
+
+    <div class="stats">
+        <div class="score-box">⭐ SCORE <span id="scoreValue">0</span></div>
+        <div class="best-box">🏆 BEST <span id="bestValue">0</span></div>
     </div>
 
-    <script>
-        // Display current date
-        document.getElementById('date').innerText = new Date().toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+    <div class="color-box" id="targetColor"></div>
+    <div class="rgb-text" id="rgbCode">rgb(?, ?, ?)</div>
 
-        // Interactive button
-        document.getElementById('clickBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('🎉 Your static website is live! 🎉\nThis is GitHub Pages in action!');
+    <div class="options" id="optionsContainer"></div>
+
+    <div class="message" id="messageBox">🎯 click a color to start!</div>
+    <button class="new-game-btn" id="newGameBtn">🔄 New Game</button>
+    <footer>🚀 hosted on GitHub Pages | static but fully playable</footer>
+</div>
+
+<script>
+    // ---------- GAME STATE ----------
+    let currentScore = 0;
+    let bestScore = localStorage.getItem('colorMatchBest') ? parseInt(localStorage.getItem('colorMatchBest')) : 0;
+    let currentTargetRGB = { r: 0, g: 0, b: 0 };
+    let currentOptions = [];   // array of {r,g,b}
+    let canPlay = true;
+    let waitingForNext = false;
+
+    // DOM elements
+    const targetColorDiv = document.getElementById('targetColor');
+    const rgbCodeSpan = document.getElementById('rgbCode');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const scoreSpan = document.getElementById('scoreValue');
+    const bestSpan = document.getElementById('bestValue');
+    const messageBox = document.getElementById('messageBox');
+
+    // display best
+    bestSpan.innerText = bestScore;
+
+    // helper: random int
+    function randomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // generate random RGB color
+    function randomRGB() {
+        return {
+            r: randomInt(0, 255),
+            g: randomInt(0, 255),
+            b: randomInt(0, 255)
+        };
+    }
+
+    // convert RGB object to CSS rgb string
+    function rgbToStyle(rgb) {
+        return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+    }
+
+    // calculate Euclidean distance between two RGB colors (0 to ~441)
+    function colorDistance(c1, c2) {
+        const dr = c1.r - c2.r;
+        const dg = c1.g - c2.g;
+        const db = c1.b - c2.b;
+        return Math.sqrt(dr*dr + dg*dg + db*db);
+    }
+
+    // generate one distractor that is noticeably different (distance > 100)
+    function generateDistractor(target, existingOptions) {
+        let attempts = 0;
+        let newColor;
+        let tooClose = true;
+        while (tooClose && attempts < 40) {
+            newColor = randomRGB();
+            const distToTarget = colorDistance(newColor, target);
+            // also check similarity to already generated options
+            let similarToExisting = false;
+            for (let opt of existingOptions) {
+                if (colorDistance(newColor, opt) < 60) {
+                    similarToExisting = true;
+                    break;
+                }
+            }
+            if (distToTarget > 90 && !similarToExisting) {
+                tooClose = false;
+            }
+            attempts++;
+        }
+        return newColor;
+    }
+
+    // generate 3 wrong options + 1 correct (the target)
+    function generateOptions(target) {
+        let opts = [];
+        // add the target itself (correct answer)
+        opts.push({ ...target });
+        // add 3 distractors
+        while (opts.length < 4) {
+            const dist = generateDistractor(target, opts);
+            // avoid duplicate exactly equal rgb
+            let duplicate = false;
+            for (let o of opts) {
+                if (o.r === dist.r && o.g === dist.g && o.b === dist.b) {
+                    duplicate = true;
+                    break;
+                }
+            }
+            if (!duplicate) {
+                opts.push(dist);
+            }
+        }
+        // shuffle options randomly
+        for (let i = opts.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [opts[i], opts[j]] = [opts[j], opts[i]];
+        }
+        return opts;
+    }
+
+    // update UI: target color box + RGB text + buttons
+    function refreshGameUI() {
+        // set the big color box to the target color
+        targetColorDiv.style.backgroundColor = rgbToStyle(currentTargetRGB);
+        // show RGB text
+        rgbCodeSpan.innerText = `rgb(${currentTargetRGB.r}, ${currentTargetRGB.g}, ${currentTargetRGB.b})`;
+        
+        // render option buttons
+        optionsContainer.innerHTML = '';
+        currentOptions.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'color-btn';
+            btn.style.backgroundColor = rgbToStyle(opt);
+            btn.style.color = (opt.r * 0.299 + opt.g * 0.587 + opt.b * 0.114) > 140 ? '#111' : '#f5f5f5';
+            btn.textContent = `⬤ ${rgbToStyle(opt)}`;
+            btn.addEventListener('click', () => handleAnswer(opt));
+            optionsContainer.appendChild(btn);
         });
-    </script>
+    }
+
+    // check if selected color matches target
+    function handleAnswer(selectedRGB) {
+        if (!canPlay || waitingForNext) return;
+
+        const isMatch = (selectedRGB.r === currentTargetRGB.r && 
+                         selectedRGB.g === currentTargetRGB.g && 
+                         selectedRGB.b === currentTargetRGB.b);
+        
+        if (isMatch) {
+            // correct!
+            currentScore++;
+            scoreSpan.innerText = currentScore;
+            messageBox.innerHTML = '✅ CORRECT! +1 point 🎉';
+            messageBox.style.color = '#2e7d32';
+            
+            // update best score
+            if (currentScore > bestScore) {
+                bestScore = currentScore;
+                bestSpan.innerText = bestScore;
+                localStorage.setItem('colorMatchBest', bestScore);
+                messageBox.innerHTML = '🏆 NEW HIGH SCORE! 🏆 +1 point';
+            }
+            
+            // go to next round after short delay
+            waitingForNext = true;
+            canPlay = false;
+            setTimeout(() => {
+                nextRound();
+            }, 700);
+        } else {
+            // wrong answer: game over
+            canPlay = false;
+            messageBox.innerHTML = `💀 GAME OVER! You scored ${currentScore}. Press "New Game". 💀`;
+            messageBox.style.color = '#c62828';
+            // disable all option buttons visually by removing click (already blocked by canPlay)
+            // but also change cursors
+            const allBtns = document.querySelectorAll('.color-btn');
+            allBtns.forEach(btn => {
+                btn.style.opacity = '0.6';
+                btn.style.cursor = 'not-allowed';
+            });
+        }
+    }
+
+    // start a new round (keep same score)
+    function nextRound() {
+        // generate new target and options
+        currentTargetRGB = randomRGB();
+        currentOptions = generateOptions(currentTargetRGB);
+        refreshGameUI();
+        canPlay = true;
+        waitingForNext = false;
+        messageBox.innerHTML = '🎨 pick the matching color!';
+        messageBox.style.color = '#444';
+        // enable all buttons
+        const allBtns = document.querySelectorAll('.color-btn');
+        allBtns.forEach(btn => {
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
+        });
+    }
+
+    // full game reset (score = 0, fresh start)
+    function resetGame() {
+        currentScore = 0;
+        scoreSpan.innerText = "0";
+        canPlay = true;
+        waitingForNext = false;
+        messageBox.innerHTML = '🔄 New game started! Match the color.';
+        messageBox.style.color = '#2a5298';
+        
+        currentTargetRGB = randomRGB();
+        currentOptions = generateOptions(currentTargetRGB);
+        refreshGameUI();
+        
+        // enable all buttons
+        const allBtns = document.querySelectorAll('.color-btn');
+        allBtns.forEach(btn => {
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
+        });
+    }
+
+    // initial load
+    function initGame() {
+        currentScore = 0;
+        scoreSpan.innerText = "0";
+        currentTargetRGB = randomRGB();
+        currentOptions = generateOptions(currentTargetRGB);
+        refreshGameUI();
+        canPlay = true;
+        waitingForNext = false;
+        messageBox.innerHTML = '🎯 click a color to start!';
+    }
+
+    // event listeners
+    document.getElementById('newGameBtn').addEventListener('click', () => {
+        resetGame();
+    });
+
+    initGame();
+</script>
 </body>
 </html>
