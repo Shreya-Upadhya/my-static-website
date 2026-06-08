@@ -1,181 +1,127 @@
-# 🎮🕹️ TIC-TAC-TOE ARCADE 🕹️🎮
+# 🎮 Tic-Tac-Toe Game
 
-```text
-████████╗██╗ ██████╗      ████████╗ █████╗  ██████╗
-╚══██╔══╝██║██╔════╝      ╚══██╔══╝██╔══██╗██╔════╝
-   ██║   ██║██║   ███╗       ██║   ███████║██║     
-   ██║   ██║██║    ██║       ██║   ██╔══██║██║     
-   ██║   ██║╚██████╔╝       ██║   ██║  ██║╚██████╗
-   ╚═╝   ╚═╝ ╚═════╝        ╚═╝   ╚═╝  ╚═╝ ╚═════╝
+A modern and interactive Tic-Tac-Toe game built using HTML, CSS, and JavaScript. The game supports both Player vs Player and Player vs AI modes, featuring a responsive UI, score tracking, winner highlighting, and an unbeatable AI powered by the Minimax algorithm.
 
-           🎮 TIC • TAC • TOE 🎮
-```
+## 🚀 Live Demo
 
-> 🚀 Hosted with GitHub Pages
-> 🤖 Play against an unbeatable AI
-> 👥 Challenge your friends locally
+Website:https://shreya-upadhya.github.io/my-static-website/
 
 ---
 
-## 🌐 LIVE WEBSITE
+## 📌 Features
 
-🔗 https://shreya-upadhya.github.io/my-static-website/
-
----
-
-## 🎯 GAME FEATURES
-
-### 👾 Arcade Gameplay
-
-* ❌ Player X vs ⭕ Player O
-* 🤖 AI Mode powered by Minimax Algorithm
-* 👥 Two Player Mode
-* 🏆 Automatic Winner Detection
-* 📊 Live Score Tracking
-* 🔄 Instant New Game Reset
-* 📱 Mobile Friendly Design
-* ✨ Neon Gaming Theme
-* 🎉 Animated Victory Popup
+- 🎯 Classic Tic-Tac-Toe gameplay
+- 🤖 Play against AI using Minimax Algorithm
+- 👥 Two-player mode
+- 🏆 Winner detection and highlighting
+- 📊 Live scoreboard
+- 🔄 New Game functionality
+- 📱 Fully responsive design
+- ✨ Modern neon-themed UI
+- 🎉 Animated game-over popup
 
 ---
 
-## 🛠 TECH STACK
+## 🛠️ Technologies Used
 
-```text
-🎨 Frontend
-├── HTML5
-├── CSS3
-└── JavaScript (ES6)
-
-⚙ Version Control
-├── Git
-└── GitHub
-
-🌍 Deployment
-└── GitHub Pages
-```
+- HTML5
+- CSS3
+- JavaScript
+- Git
+- GitHub Pages
 
 ---
 
-## 📂 PROJECT STRUCTURE
+## 📂 Project Structure
 
 ```text
 tic-tac-toe/
 │
 ├── index.html
-├── style.css
-├── script.js
 └── README.md
 ```
 
 ---
 
-## 🎮 HOW TO PLAY
+## ⚙️ Setup Instructions
 
-### 👥 VS HUMAN MODE
-
-```text
-PLAYER X  →  PLAYER O
-    ↓             ↓
- Take Turns & Get 3 In A Row
-```
-
-Win by matching:
-
-```text
-❌ ❌ ❌
-⭕ ⭕ ⭕
-```
-
-Horizontally, Vertically, or Diagonally.
-
----
-
-### 🤖 VS AI MODE
-
-```text
-YOU = ❌
-AI  = ⭕
-```
-
-The AI uses the **Minimax Algorithm** and always chooses the best possible move.
-
-⚠️ Warning: The AI never loses.
-
----
-
-## 🧠 AI ENGINE
-
-```text
-INPUT BOARD
-     ↓
-MINIMAX SEARCH
-     ↓
-EVALUATE MOVES
-     ↓
-BEST MOVE SELECTED
-     ↓
-AI PLAYS
-```
-
-### Benefits
-
-✅ Never loses
-✅ Smart decision making
-✅ Competitive gameplay
-✅ Real-time move evaluation
-
----
-
-## 🚀 DEPLOYMENT STEPS
+### Clone Repository
 
 ```bash
-git init
-git add .
-git commit -m "Initial Commit"
-
-git branch -M main
-
-git remote add origin REPOSITORY_URL
-
-git push -u origin main
+git clone https://github.com/Shreya-Upadhya/tic-tac-toe.git
 ```
 
-Enable GitHub Pages:
+### Navigate to Project Folder
 
-```text
-Repository
-   ↓
-Settings
-   ↓
-Pages
-   ↓
-Deploy From Branch
-   ↓
-main / root
+```bash
+cd tic-tac-toe
 ```
 
-GitHub automatically generates:
+### Run the Application
+
+Open the `index.html` file in your browser.
+
+---
+
+## 🌐 Deployment Using GitHub Pages
+
+1. Create a GitHub repository.
+2. Push the project files to GitHub.
+3. Open Repository → Settings → Pages.
+4. Under Build and Deployment:
+   - Source: Deploy from branch
+   - Branch: main
+   - Folder: / (root)
+5. Click Save.
+6. GitHub will generate a live website URL.
+
+Example:
 
 ```text
-https://shreya-upadhya.github.io/my-static-website/
+https://yourusername.github.io/tic-tac-toe/
 ```
 
 ---
 
-## 📈 WHAT I LEARNED
+## 🎮 How to Play
 
-🎯 JavaScript Game Logic
+### Player vs Human Mode
 
-🎯 DOM Manipulation
+1. Select "👥 vs Human".
+2. Players take turns placing X and O.
+3. The first player to align three symbols wins.
 
-🎯 Minimax AI Algorithm
+### Player vs AI Mode
 
-🎯 Responsive Web Design
-
-🎯 Git & GitHub Workflow
-
-🎯 GitHub Pages Deployment
+1. Select "🤖 vs AI".
+2. You play as X.
+3. AI plays as O.
+4. Try to beat the AI.
 
 ---
+
+## 🧠 AI Implementation
+
+The AI opponent uses the Minimax Algorithm.
+
+Benefits:
+- Never loses
+- Chooses the best possible move
+- Creates a challenging gameplay experience
+
+---
+
+## 📈 Learning Outcomes
+
+Through this project, I learned:
+
+- Building interactive web applications
+- DOM manipulation using JavaScript
+- Implementing game logic
+- Using the Minimax algorithm
+- Hosting websites using GitHub Pages
+- Version control with Git and GitHub
+
+---
+
 
