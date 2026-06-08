@@ -78,7 +78,7 @@ Open the `index.html` file in your browser.
 Example:
 
 ```text
-https://yourusername.github.io/tic-tac-toe/
+https://Shreya-Upadhya.github.io/tic-tac-toe/
 ```
 
 ---
