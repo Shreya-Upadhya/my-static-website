@@ -4,7 +4,7 @@ A modern and interactive Tic-Tac-Toe game built using HTML, CSS, and JavaScript.
 
 ## 🚀 Live Demo
 
-Website: https://yourusername.github.io/tic-tac-toe
+Website: https://shreya-upadhya.github.io/my-static-website/
 
 ---
 
@@ -78,7 +78,7 @@ Open the `index.html` file in your browser.
 Example:
 
 ```text
-https://yourusername.github.io/tic-tac-toe/
+https://shreya-upadhya.github.io/my-static-website/
 ```
 
 ---
