@@ -48,7 +48,7 @@ tic-tac-toe/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/Shreya-Upadhya/tic-tac-toe.git
+git clone https://github.com/Shreya-Upadhya/my-static-website.git
 ```
 
 ### Navigate to Project Folder
@@ -78,7 +78,7 @@ Open the `index.html` file in your browser.
 Example:
 
 ```text
-https://Shreya-Upadhya.github.io/tic-tac-toe/
+https://Shreya-Upadhya.github.io/my-static-website/
 ```
 
 ---
