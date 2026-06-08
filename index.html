@@ -13,7 +13,7 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
             font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
             display: flex;
             justify-content: center;
@@ -22,28 +22,35 @@
         }
 
         .game-wrapper {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(10, 10, 20, 0.92);
             border-radius: 40px;
             padding: 25px;
             max-width: 550px;
             width: 100%;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 60px rgba(0, 255, 200, 0.15), 0 25px 50px rgba(0, 0, 0, 0.6);
             text-align: center;
+            border: 2px solid rgba(0, 255, 200, 0.15);
+            backdrop-filter: blur(20px);
         }
 
         h1 {
-            font-size: 2rem;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #00F5D4, #F15BB5, #FEE440);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             margin-bottom: 5px;
+            filter: drop-shadow(0 0 30px rgba(0, 245, 212, 0.5));
+            letter-spacing: 2px;
         }
 
         .sub {
-            color: #666;
+            color: #F15BB5;
             font-size: 0.8rem;
             margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
         }
 
         .mode-selector {
@@ -54,77 +61,107 @@
         }
 
         .mode-btn {
-            background: #f0f2f5;
-            border: none;
-            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(0, 255, 200, 0.25);
+            padding: 10px 24px;
             border-radius: 30px;
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 0.9rem;
+            color: #00F5D4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mode-btn:hover {
+            background: rgba(0, 245, 212, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 245, 212, 0.25);
+            border-color: rgba(0, 245, 212, 0.5);
         }
 
         .mode-btn.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            background: linear-gradient(135deg, #00F5D4, #9B5DE5);
+            color: #0a0a0a;
+            border-color: transparent;
+            box-shadow: 0 0 35px rgba(0, 245, 212, 0.5);
+            font-weight: 900;
         }
 
         .status {
-            font-size: 1.2rem;
-            font-weight: bold;
-            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            padding: 14px 20px;
             margin: 15px 0;
             border-radius: 50px;
-            background: #f0f2f5;
-            color: #333;
+            background: rgba(255, 255, 255, 0.04);
+            color: #FFFFFF;
+            border: 2px solid rgba(245, 91, 181, 0.25);
+            letter-spacing: 0.5px;
         }
 
         .board {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 12px;
-            background: #667eea;
+            background: #050508;
             padding: 12px;
             border-radius: 25px;
             margin: 20px 0;
+            border: 2px solid rgba(0, 245, 200, 0.1);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
         }
 
         .cell {
             aspect-ratio: 1;
-            background: white;
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4rem;
-            font-weight: bold;
+            font-weight: 900;
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.04);
+            text-shadow: 0 0 25px currentColor;
+            position: relative;
+            overflow: hidden;
         }
 
         .cell:hover {
-            transform: scale(1.02);
-            background: #f8f9ff;
+            transform: scale(1.04);
+            background: rgba(0, 245, 212, 0.06);
+            border-color: rgba(0, 245, 212, 0.35);
+            box-shadow: 0 0 30px rgba(0, 245, 212, 0.15);
         }
 
         .cell.X {
-            color: #667eea;
+            color: #00F5D4;
+            text-shadow: 0 0 35px rgba(0, 245, 212, 0.7);
         }
 
         .cell.O {
-            color: #764ba2;
+            color: #F15BB5;
+            text-shadow: 0 0 35px rgba(245, 91, 181, 0.7);
         }
 
         .cell.winner {
-            background: linear-gradient(135deg, #ffd89b, #c7e9fb);
-            animation: pulse 0.5s ease;
+            background: linear-gradient(135deg, rgba(0, 245, 212, 0.25), rgba(155, 93, 229, 0.25));
+            animation: pulse 0.5s ease, neonGlow 1.2s ease-in-out infinite alternate;
+            border-color: #00F5D4;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.06); }
+        }
+
+        @keyframes neonGlow {
+            from { box-shadow: 0 0 15px rgba(0, 245, 212, 0.3), inset 0 0 15px rgba(0, 245, 212, 0.1); }
+            to { box-shadow: 0 0 35px rgba(0, 245, 212, 0.5), inset 0 0 25px rgba(0, 245, 212, 0.2); }
         }
 
         .scoreboard {
@@ -136,50 +173,132 @@
 
         .score-card {
             flex: 1;
-            background: #f0f2f5;
-            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 14px;
             border-radius: 20px;
             text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s;
         }
 
         .score-card h3 {
-            font-size: 0.9rem;
-            color: #666;
+            font-size: 0.85rem;
+            color: #888;
             margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .score-card .score {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 2.2rem;
+            font-weight: 900;
         }
 
-        .score-card .score.X { color: #667eea; }
-        .score-card .score.O { color: #764ba2; }
+        .score-card .score.X {
+            color: #00F5D4;
+            text-shadow: 0 0 25px rgba(0, 245, 212, 0.5);
+        }
+        .score-card .score.O {
+            color: #F15BB5;
+            text-shadow: 0 0 25px rgba(245, 91, 181, 0.5);
+        }
 
         .reset-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, #00F5D4, #9B5DE5);
+            color: #0a0a0a;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 30px;
             border-radius: 40px;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 900;
             cursor: pointer;
             margin: 10px 0;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 3px;
         }
 
         .reset-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 35px rgba(0, 245, 212, 0.4);
+            background: linear-gradient(135deg, #9B5DE5, #F15BB5);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .popup.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup-content {
+            background: rgba(15, 15, 25, 0.98);
+            border: 2px solid rgba(0, 245, 212, 0.3);
+            border-radius: 35px;
+            padding: 35px 30px;
+            text-align: center;
+            box-shadow: 0 0 60px rgba(0, 245, 212, 0.25), 0 20px 50px rgba(0, 0, 0, 0.7);
+            max-width: 450px;
+            width: 90%;
+            animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.85) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .popup-emoji {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            animation: bounceEmoji 1s ease infinite;
+        }
+
+        @keyframes bounceEmoji {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .popup-content h2 {
+            background: linear-gradient(135deg, #00F5D4, #F15BB5, #FEE440);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 900;
+        }
+
+        .popup-content p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
         }
 
         footer {
             font-size: 0.7rem;
-            color: #aaa;
+            color: #555;
             margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         @media (max-width: 480px) {
@@ -190,7 +309,10 @@
                 font-size: 3rem;
             }
             .status {
-                font-size: 1rem;
+                font-size: 0.95rem;
+            }
+            h1 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -198,7 +320,6 @@
 <body>
 <div class="game-wrapper">
     <h1>🎮 TIC-TAC-TOE</h1>
-    <div class="sub">classic strategy game</div>
 
     <div class="mode-selector">
         <button class="mode-btn" id="vsHumanBtn">👥 vs Human</button>
@@ -219,6 +340,15 @@
         <div class="cell" data-index="8"></div>
     </div>
 
+    <div class="popup" id="gameOverPopup">
+        <div class="popup-content">
+            <div class="popup-emoji" id="popupEmoji">🏆</div>
+            <h2 id="popupTitle">Player X wins!</h2>
+            <p id="popupSubtitle"></p>
+            <button class="reset-btn" id="popupResetBtn">🔄 New Game</button>
+        </div>
+    </div>
+
     <div class="scoreboard">
         <div class="score-card">
             <h3>❌ Player X</h3>
@@ -230,7 +360,6 @@
         </div>
     </div>
 
-    <button class="reset-btn" id="resetBtn">🔄 New Game</button>
     <footer>🚀 hosted on GitHub Pages | play with friends or AI</footer>
 </div>
 
@@ -255,9 +384,13 @@
     const statusMsg = document.getElementById('statusMsg');
     const scoreXElement = document.getElementById('scoreX');
     const scoreOElement = document.getElementById('scoreO');
-    const resetBtn = document.getElementById('resetBtn');
     const vsHumanBtn = document.getElementById('vsHumanBtn');
     const vsAIBtn = document.getElementById('vsAIBtn');
+    const gameOverPopup = document.getElementById('gameOverPopup');
+    const popupTitle = document.getElementById('popupTitle');
+    const popupSubtitle = document.getElementById('popupSubtitle');
+    const popupEmoji = document.getElementById('popupEmoji');
+    const popupResetBtn = document.getElementById('popupResetBtn');
 
     // Initialize game
     function init() {
@@ -278,7 +411,10 @@
             resetGame();
         });
         
-        resetBtn.addEventListener('click', () => resetGame());
+        popupResetBtn.addEventListener('click', () => {
+            hideGameOverPopup();
+            resetGame();
+        });
     }
 
     // Reset game board
@@ -287,7 +423,7 @@
         currentPlayer = 'X';
         gameActive = true;
         statusMsg.innerHTML = isAIMode && currentPlayer === 'O' ? "AI is thinking... 🤖" : "Player X's turn (❌)";
-        statusMsg.style.color = '#333';
+        statusMsg.style.color = '#FFFFFF';
         
         // Clear winner highlights
         document.querySelectorAll('.cell').forEach(cell => {
@@ -313,7 +449,7 @@
         if (checkWin()) {
             gameActive = false;
             statusMsg.innerHTML = `🎉 Player ${currentPlayer} wins! 🎉`;
-            statusMsg.style.color = currentPlayer === 'X' ? '#667eea' : '#764ba2';
+            statusMsg.style.color = currentPlayer === 'X' ? '#00F5D4' : '#F15BB5';
             if (currentPlayer === 'X') {
                 scoreX++;
                 updateScores();
@@ -322,13 +458,15 @@
                 updateScores();
             }
             highlightWinningCombo();
+            showGameOverPopup(`Player ${currentPlayer} won!`, 'Nice move!', '🏆');
             return true;
         }
         
         if (checkDraw()) {
             gameActive = false;
             statusMsg.innerHTML = "🤝 It's a draw! 🤝";
-            statusMsg.style.color = '#ff9800';
+            statusMsg.style.color = '#FF6600';
+            showGameOverPopup("It's a tie!", 'Better luck next round', '🤝');
             return true;
         }
         
@@ -481,27 +619,26 @@
             return;
         }
         
-        // Check if it's 2-player mode and game is active
-        if (!gameActive) {
-            statusMsg.innerHTML = "Game over! Click New Game to play again!";
-            return;
-        }
-        
         makeMove(index);
     }
 
     // Event listeners
     boardElement.addEventListener('click', handleCellClick);
 
-    // Reset scores button (optional - double click reset btn for scores)
-    let resetTimer;
-    resetBtn.addEventListener('dblclick', () => {
-        resetScores();
-        statusMsg.innerHTML = "Scores reset! Starting new game...";
-        setTimeout(() => {
-            statusMsg.innerHTML = getTurnMessage();
-        }, 1500);
-    });
+    // Popup helpers
+    function showGameOverPopup(title, subtitle, emoji) {
+        if (!gameOverPopup || !popupTitle || !popupSubtitle || !popupEmoji || !popupResetBtn) return;
+        popupTitle.textContent = title;
+        popupSubtitle.textContent = subtitle;
+        popupEmoji.textContent = emoji || '🎮';
+        gameOverPopup.classList.add('show');
+        if (popupResetBtn) popupResetBtn.focus();
+    }
+
+    function hideGameOverPopup() {
+        if (!gameOverPopup) return;
+        gameOverPopup.classList.remove('show');
+    }
 
     // Start game
     init();
