@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>🎨 Color Match Challenge | GitHub Pages Game</title>
+    <title>🎮 Tic-Tac-Toe | Classic Game</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none;
         }
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
             display: flex;
             justify-content: center;
@@ -22,20 +21,19 @@
             padding: 20px;
         }
 
-        .game-container {
-            background: rgba(255,255,255,0.95);
+        .game-wrapper {
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 40px;
-            padding: 20px 25px 35px;
+            padding: 25px;
             max-width: 550px;
             width: 100%;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
             text-align: center;
-            transition: transform 0.2s;
         }
 
         h1 {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -48,117 +46,134 @@
             margin-bottom: 20px;
         }
 
-        .stats {
+        .mode-selector {
             display: flex;
-            justify-content: space-between;
-            background: #f0f2f5;
-            padding: 12px 20px;
-            border-radius: 60px;
+            gap: 15px;
+            justify-content: center;
             margin-bottom: 25px;
-            font-weight: bold;
         }
 
-        .score-box, .best-box {
-            background: white;
-            padding: 5px 15px;
-            border-radius: 40px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .score-box span:first-child, .best-box span:first-child {
-            color: #888;
-            font-size: 0.75rem;
-        }
-
-        .score-box span:last-child, .best-box span:last-child {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #2a5298;
-            margin-left: 8px;
-        }
-
-        .color-box {
-            width: 200px;
-            height: 200px;
-            margin: 15px auto;
+        .mode-btn {
+            background: #f0f2f5;
+            border: none;
+            padding: 8px 20px;
             border-radius: 30px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            transition: all 0.1s ease;
-            cursor: pointer;
-            border: 4px solid white;
-        }
-
-        .color-box:active {
-            transform: scale(0.97);
-        }
-
-        .rgb-text {
-            font-family: monospace;
-            font-size: 1.5rem;
             font-weight: bold;
-            background: #1e1e2f;
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 50px;
-            color: #ffd966;
-            letter-spacing: 1px;
-            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
         }
 
-        .options {
+        .mode-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .status {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 50px;
+            background: #f0f2f5;
+            color: #333;
+        }
+
+        .board {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 12px;
+            background: #667eea;
+            padding: 12px;
+            border-radius: 25px;
             margin: 20px 0;
         }
 
-        .color-btn {
-            padding: 14px;
-            border: none;
-            border-radius: 60px;
+        .cell {
+            aspect-ratio: 1;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
             font-weight: bold;
-            font-size: 1rem;
             cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .cell:hover {
+            transform: scale(1.02);
+            background: #f8f9ff;
+        }
+
+        .cell.X {
+            color: #667eea;
+        }
+
+        .cell.O {
+            color: #764ba2;
+        }
+
+        .cell.winner {
+            background: linear-gradient(135deg, #ffd89b, #c7e9fb);
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .scoreboard {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .score-card {
+            flex: 1;
             background: #f0f2f5;
-            color: #333;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            padding: 12px;
+            border-radius: 20px;
+            text-align: center;
         }
 
-        .color-btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(0.96);
+        .score-card h3 {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
         }
 
-        .color-btn:active {
-            transform: translateY(1px);
-        }
-
-        .message {
-            font-size: 1rem;
-            margin: 12px 0;
-            padding: 8px;
-            border-radius: 40px;
+        .score-card .score {
+            font-size: 2rem;
             font-weight: bold;
+            color: #667eea;
         }
 
-        .new-game-btn {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+        .score-card .score.X { color: #667eea; }
+        .score-card .score.O { color: #764ba2; }
+
+        .reset-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 30px;
             border-radius: 40px;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
-            transition: all 0.2s;
-            width: 80%;
+            margin: 10px 0;
+            transition: all 0.3s;
+            width: 100%;
         }
 
-        .new-game-btn:hover {
-            transform: scale(1.02);
-            filter: brightness(1.05);
+        .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
 
         footer {
@@ -168,259 +183,328 @@
         }
 
         @media (max-width: 480px) {
-            .game-container {
-                padding: 15px 18px 25px;
+            .game-wrapper {
+                padding: 20px;
             }
-            .color-box {
-                width: 160px;
-                height: 160px;
+            .cell {
+                font-size: 3rem;
             }
-            .rgb-text {
-                font-size: 1.1rem;
+            .status {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-<div class="game-container">
-    <h1>🎨 COLOR MATCH</h1>
-    <div class="sub">match the RGB value → tap the correct color</div>
+<div class="game-wrapper">
+    <h1>🎮 TIC-TAC-TOE</h1>
+    <div class="sub">classic strategy game</div>
 
-    <div class="stats">
-        <div class="score-box">⭐ SCORE <span id="scoreValue">0</span></div>
-        <div class="best-box">🏆 BEST <span id="bestValue">0</span></div>
+    <div class="mode-selector">
+        <button class="mode-btn" id="vsHumanBtn">👥 vs Human</button>
+        <button class="mode-btn active" id="vsAIBtn">🤖 vs AI</button>
     </div>
 
-    <div class="color-box" id="targetColor"></div>
-    <div class="rgb-text" id="rgbCode">rgb(?, ?, ?)</div>
+    <div class="status" id="statusMsg">Your turn (X)</div>
 
-    <div class="options" id="optionsContainer"></div>
+    <div class="board" id="board">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+    </div>
 
-    <div class="message" id="messageBox">🎯 click a color to start!</div>
-    <button class="new-game-btn" id="newGameBtn">🔄 New Game</button>
-    <footer>🚀 hosted on GitHub Pages | static but fully playable</footer>
+    <div class="scoreboard">
+        <div class="score-card">
+            <h3>❌ Player X</h3>
+            <div class="score X" id="scoreX">0</div>
+        </div>
+        <div class="score-card">
+            <h3>⭕ Player O</h3>
+            <div class="score O" id="scoreO">0</div>
+        </div>
+    </div>
+
+    <button class="reset-btn" id="resetBtn">🔄 New Game</button>
+    <footer>🚀 hosted on GitHub Pages | play with friends or AI</footer>
 </div>
 
 <script>
-    // ---------- GAME STATE ----------
-    let currentScore = 0;
-    let bestScore = localStorage.getItem('colorMatchBest') ? parseInt(localStorage.getItem('colorMatchBest')) : 0;
-    let currentTargetRGB = { r: 0, g: 0, b: 0 };
-    let currentOptions = [];   // array of {r,g,b}
-    let canPlay = true;
-    let waitingForNext = false;
+    // Game state
+    let board = ['', '', '', '', '', '', '', '', ''];
+    let currentPlayer = 'X';
+    let gameActive = true;
+    let isAIMode = true;
+    let scoreX = 0;
+    let scoreO = 0;
+
+    // Winning combinations
+    const winPatterns = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+        [0, 4, 8], [2, 4, 6]              // Diagonals
+    ];
 
     // DOM elements
-    const targetColorDiv = document.getElementById('targetColor');
-    const rgbCodeSpan = document.getElementById('rgbCode');
-    const optionsContainer = document.getElementById('optionsContainer');
-    const scoreSpan = document.getElementById('scoreValue');
-    const bestSpan = document.getElementById('bestValue');
-    const messageBox = document.getElementById('messageBox');
+    const boardElement = document.getElementById('board');
+    const statusMsg = document.getElementById('statusMsg');
+    const scoreXElement = document.getElementById('scoreX');
+    const scoreOElement = document.getElementById('scoreO');
+    const resetBtn = document.getElementById('resetBtn');
+    const vsHumanBtn = document.getElementById('vsHumanBtn');
+    const vsAIBtn = document.getElementById('vsAIBtn');
 
-    // display best
-    bestSpan.innerText = bestScore;
-
-    // helper: random int
-    function randomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    // generate random RGB color
-    function randomRGB() {
-        return {
-            r: randomInt(0, 255),
-            g: randomInt(0, 255),
-            b: randomInt(0, 255)
-        };
-    }
-
-    // convert RGB object to CSS rgb string
-    function rgbToStyle(rgb) {
-        return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-    }
-
-    // calculate Euclidean distance between two RGB colors (0 to ~441)
-    function colorDistance(c1, c2) {
-        const dr = c1.r - c2.r;
-        const dg = c1.g - c2.g;
-        const db = c1.b - c2.b;
-        return Math.sqrt(dr*dr + dg*dg + db*db);
-    }
-
-    // generate one distractor that is noticeably different (distance > 100)
-    function generateDistractor(target, existingOptions) {
-        let attempts = 0;
-        let newColor;
-        let tooClose = true;
-        while (tooClose && attempts < 40) {
-            newColor = randomRGB();
-            const distToTarget = colorDistance(newColor, target);
-            // also check similarity to already generated options
-            let similarToExisting = false;
-            for (let opt of existingOptions) {
-                if (colorDistance(newColor, opt) < 60) {
-                    similarToExisting = true;
-                    break;
-                }
-            }
-            if (distToTarget > 90 && !similarToExisting) {
-                tooClose = false;
-            }
-            attempts++;
-        }
-        return newColor;
-    }
-
-    // generate 3 wrong options + 1 correct (the target)
-    function generateOptions(target) {
-        let opts = [];
-        // add the target itself (correct answer)
-        opts.push({ ...target });
-        // add 3 distractors
-        while (opts.length < 4) {
-            const dist = generateDistractor(target, opts);
-            // avoid duplicate exactly equal rgb
-            let duplicate = false;
-            for (let o of opts) {
-                if (o.r === dist.r && o.g === dist.g && o.b === dist.b) {
-                    duplicate = true;
-                    break;
-                }
-            }
-            if (!duplicate) {
-                opts.push(dist);
-            }
-        }
-        // shuffle options randomly
-        for (let i = opts.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [opts[i], opts[j]] = [opts[j], opts[i]];
-        }
-        return opts;
-    }
-
-    // update UI: target color box + RGB text + buttons
-    function refreshGameUI() {
-        // set the big color box to the target color
-        targetColorDiv.style.backgroundColor = rgbToStyle(currentTargetRGB);
-        // show RGB text
-        rgbCodeSpan.innerText = `rgb(${currentTargetRGB.r}, ${currentTargetRGB.g}, ${currentTargetRGB.b})`;
-        
-        // render option buttons
-        optionsContainer.innerHTML = '';
-        currentOptions.forEach((opt, idx) => {
-            const btn = document.createElement('button');
-            btn.className = 'color-btn';
-            btn.style.backgroundColor = rgbToStyle(opt);
-            btn.style.color = (opt.r * 0.299 + opt.g * 0.587 + opt.b * 0.114) > 140 ? '#111' : '#f5f5f5';
-            btn.textContent = `⬤ ${rgbToStyle(opt)}`;
-            btn.addEventListener('click', () => handleAnswer(opt));
-            optionsContainer.appendChild(btn);
-        });
-    }
-
-    // check if selected color matches target
-    function handleAnswer(selectedRGB) {
-        if (!canPlay || waitingForNext) return;
-
-        const isMatch = (selectedRGB.r === currentTargetRGB.r && 
-                         selectedRGB.g === currentTargetRGB.g && 
-                         selectedRGB.b === currentTargetRGB.b);
-        
-        if (isMatch) {
-            // correct!
-            currentScore++;
-            scoreSpan.innerText = currentScore;
-            messageBox.innerHTML = '✅ CORRECT! +1 point 🎉';
-            messageBox.style.color = '#2e7d32';
-            
-            // update best score
-            if (currentScore > bestScore) {
-                bestScore = currentScore;
-                bestSpan.innerText = bestScore;
-                localStorage.setItem('colorMatchBest', bestScore);
-                messageBox.innerHTML = '🏆 NEW HIGH SCORE! 🏆 +1 point';
-            }
-            
-            // go to next round after short delay
-            waitingForNext = true;
-            canPlay = false;
-            setTimeout(() => {
-                nextRound();
-            }, 700);
-        } else {
-            // wrong answer: game over
-            canPlay = false;
-            messageBox.innerHTML = `💀 GAME OVER! You scored ${currentScore}. Press "New Game". 💀`;
-            messageBox.style.color = '#c62828';
-            // disable all option buttons visually by removing click (already blocked by canPlay)
-            // but also change cursors
-            const allBtns = document.querySelectorAll('.color-btn');
-            allBtns.forEach(btn => {
-                btn.style.opacity = '0.6';
-                btn.style.cursor = 'not-allowed';
-            });
-        }
-    }
-
-    // start a new round (keep same score)
-    function nextRound() {
-        // generate new target and options
-        currentTargetRGB = randomRGB();
-        currentOptions = generateOptions(currentTargetRGB);
-        refreshGameUI();
-        canPlay = true;
-        waitingForNext = false;
-        messageBox.innerHTML = '🎨 pick the matching color!';
-        messageBox.style.color = '#444';
-        // enable all buttons
-        const allBtns = document.querySelectorAll('.color-btn');
-        allBtns.forEach(btn => {
-            btn.style.opacity = '1';
-            btn.style.cursor = 'pointer';
-        });
-    }
-
-    // full game reset (score = 0, fresh start)
-    function resetGame() {
-        currentScore = 0;
-        scoreSpan.innerText = "0";
-        canPlay = true;
-        waitingForNext = false;
-        messageBox.innerHTML = '🔄 New game started! Match the color.';
-        messageBox.style.color = '#2a5298';
-        
-        currentTargetRGB = randomRGB();
-        currentOptions = generateOptions(currentTargetRGB);
-        refreshGameUI();
-        
-        // enable all buttons
-        const allBtns = document.querySelectorAll('.color-btn');
-        allBtns.forEach(btn => {
-            btn.style.opacity = '1';
-            btn.style.cursor = 'pointer';
-        });
-    }
-
-    // initial load
-    function initGame() {
-        currentScore = 0;
-        scoreSpan.innerText = "0";
-        currentTargetRGB = randomRGB();
-        currentOptions = generateOptions(currentTargetRGB);
-        refreshGameUI();
-        canPlay = true;
-        waitingForNext = false;
-        messageBox.innerHTML = '🎯 click a color to start!';
-    }
-
-    // event listeners
-    document.getElementById('newGameBtn').addEventListener('click', () => {
+    // Initialize game
+    function init() {
+        updateScores();
         resetGame();
+        
+        vsHumanBtn.addEventListener('click', () => {
+            isAIMode = false;
+            vsHumanBtn.classList.add('active');
+            vsAIBtn.classList.remove('active');
+            resetGame();
+        });
+        
+        vsAIBtn.addEventListener('click', () => {
+            isAIMode = true;
+            vsAIBtn.classList.add('active');
+            vsHumanBtn.classList.remove('active');
+            resetGame();
+        });
+        
+        resetBtn.addEventListener('click', () => resetGame());
+    }
+
+    // Reset game board
+    function resetGame() {
+        board = ['', '', '', '', '', '', '', '', ''];
+        currentPlayer = 'X';
+        gameActive = true;
+        statusMsg.innerHTML = isAIMode && currentPlayer === 'O' ? "AI is thinking... 🤖" : "Player X's turn (❌)";
+        statusMsg.style.color = '#333';
+        
+        // Clear winner highlights
+        document.querySelectorAll('.cell').forEach(cell => {
+            cell.classList.remove('winner', 'X', 'O');
+            cell.textContent = '';
+        });
+        
+        // If AI starts (rare but possible) - we always let X start first
+        // So AI will only move after X plays in AI mode
+    }
+
+    // Make a move
+    function makeMove(index) {
+        if (!gameActive || board[index] !== '') return false;
+        
+        // Place the mark
+        board[index] = currentPlayer;
+        const cell = document.querySelector(`.cell[data-index="${index}"]`);
+        cell.textContent = currentPlayer;
+        cell.classList.add(currentPlayer);
+        
+        // Check win/draw
+        if (checkWin()) {
+            gameActive = false;
+            statusMsg.innerHTML = `🎉 Player ${currentPlayer} wins! 🎉`;
+            statusMsg.style.color = currentPlayer === 'X' ? '#667eea' : '#764ba2';
+            if (currentPlayer === 'X') {
+                scoreX++;
+                updateScores();
+            } else {
+                scoreO++;
+                updateScores();
+            }
+            highlightWinningCombo();
+            return true;
+        }
+        
+        if (checkDraw()) {
+            gameActive = false;
+            statusMsg.innerHTML = "🤝 It's a draw! 🤝";
+            statusMsg.style.color = '#ff9800';
+            return true;
+        }
+        
+        // Switch player
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        statusMsg.innerHTML = getTurnMessage();
+        
+        // Trigger AI move if in AI mode and game still active
+        if (isAIMode && gameActive && currentPlayer === 'O') {
+            setTimeout(() => aiMove(), 300);
+        }
+        
+        return true;
+    }
+
+    // Get turn message
+    function getTurnMessage() {
+        if (isAIMode && currentPlayer === 'O') {
+            return "AI is thinking... 🤖";
+        }
+        return `Player ${currentPlayer}'s turn ${currentPlayer === 'X' ? '❌' : '⭕'}`;
+    }
+
+    // AI move using minimax algorithm (unbeatable)
+    function aiMove() {
+        if (!gameActive || currentPlayer !== 'O') return;
+        
+        const bestMove = getBestMove();
+        if (bestMove !== -1) {
+            makeMove(bestMove);
+        }
+    }
+
+    // Get best move for AI using minimax
+    function getBestMove() {
+        let bestScore = -Infinity;
+        let bestMove = -1;
+        
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === '') {
+                board[i] = 'O';
+                let score = minimax(board, 0, false);
+                board[i] = '';
+                
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = i;
+                }
+            }
+        }
+        return bestMove;
+    }
+
+    // Minimax algorithm
+    function minimax(boardState, depth, isMaximizing) {
+        // Check terminal states
+        const winner = checkWinnerOnBoard(boardState);
+        if (winner === 'O') return 10 - depth;
+        if (winner === 'X') return depth - 10;
+        if (isBoardFull(boardState)) return 0;
+        
+        if (isMaximizing) {
+            let bestScore = -Infinity;
+            for (let i = 0; i < 9; i++) {
+                if (boardState[i] === '') {
+                    boardState[i] = 'O';
+                    let score = minimax(boardState, depth + 1, false);
+                    boardState[i] = '';
+                    bestScore = Math.max(score, bestScore);
+                }
+            }
+            return bestScore;
+        } else {
+            let bestScore = Infinity;
+            for (let i = 0; i < 9; i++) {
+                if (boardState[i] === '') {
+                    boardState[i] = 'X';
+                    let score = minimax(boardState, depth + 1, true);
+                    boardState[i] = '';
+                    bestScore = Math.min(score, bestScore);
+                }
+            }
+            return bestScore;
+        }
+    }
+
+    // Check winner on a given board
+    function checkWinnerOnBoard(boardState) {
+        for (let pattern of winPatterns) {
+            const [a, b, c] = pattern;
+            if (boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c]) {
+                return boardState[a];
+            }
+        }
+        return null;
+    }
+
+    // Check if board is full
+    function isBoardFull(boardState) {
+        return boardState.every(cell => cell !== '');
+    }
+
+    // Check win on current board
+    function checkWin() {
+        return checkWinnerOnBoard(board) !== null;
+    }
+
+    // Check draw
+    function checkDraw() {
+        return isBoardFull(board) && !checkWin();
+    }
+
+    // Highlight winning cells
+    function highlightWinningCombo() {
+        for (let pattern of winPatterns) {
+            const [a, b, c] = pattern;
+            if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                document.querySelector(`.cell[data-index="${a}"]`).classList.add('winner');
+                document.querySelector(`.cell[data-index="${b}"]`).classList.add('winner');
+                document.querySelector(`.cell[data-index="${c}"]`).classList.add('winner');
+                break;
+            }
+        }
+    }
+
+    // Update scores display
+    function updateScores() {
+        scoreXElement.textContent = scoreX;
+        scoreOElement.textContent = scoreO;
+    }
+
+    // Reset scores
+    function resetScores() {
+        scoreX = 0;
+        scoreO = 0;
+        updateScores();
+        resetGame();
+    }
+
+    // Handle cell clicks
+    function handleCellClick(e) {
+        const cell = e.target.closest('.cell');
+        if (!cell) return;
+        
+        const index = parseInt(cell.dataset.index);
+        
+        // Check if it's AI mode and it's AI's turn
+        if (isAIMode && currentPlayer === 'O') {
+            statusMsg.innerHTML = "Wait for AI to move... 🤖";
+            return;
+        }
+        
+        // Check if it's 2-player mode and game is active
+        if (!gameActive) {
+            statusMsg.innerHTML = "Game over! Click New Game to play again!";
+            return;
+        }
+        
+        makeMove(index);
+    }
+
+    // Event listeners
+    boardElement.addEventListener('click', handleCellClick);
+
+    // Reset scores button (optional - double click reset btn for scores)
+    let resetTimer;
+    resetBtn.addEventListener('dblclick', () => {
+        resetScores();
+        statusMsg.innerHTML = "Scores reset! Starting new game...";
+        setTimeout(() => {
+            statusMsg.innerHTML = getTurnMessage();
+        }, 1500);
     });
 
-    initGame();
+    // Start game
+    init();
 </script>
 </body>
 </html>
